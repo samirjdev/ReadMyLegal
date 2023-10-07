@@ -7,7 +7,8 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse.BodyHandler;
 import java.net.http.HttpResponse.BodyHandlers;
-import com.google.code.gson;
+
+import com.google.gson.Gson;
 
 import io.reactivex.exceptions.Exceptions;
 import retrofit2.http.Body;
@@ -19,7 +20,8 @@ public class RequestHttp {
 
         Transcript transcript = new Transcript();
         transcript.setAudio_url("https://github.com/AssemblyAI-Examples/audio-examples/raw/main/20230607_me_canadian_wildfires.mp3");
-        Gson gson = new Gson();
+       Gson gson = new Gson();
+       
 
 
         HttpRequest postRequest = HttpRequest.newBuilder()

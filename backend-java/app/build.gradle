@@ -33,19 +33,11 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.theokanning.openai-gpt3-java/service
     implementation 'com.theokanning.openai-gpt3-java:service:0.16.0'
-<<<<<<< Updated upstream
-    implementation 'io.github.reactiveclown:openai-webflux-client-spring-boot-starter:0.9.1'
 
-    //This dependency is used by the SB.
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-=======
-     implementation 'com.google.code.gson:gson:2.8.6'
-
->>>>>>> Stashed changes
+    implementation 'com.google.code.gson:gson:2.8.6'
 
 }
+
 
 application {
     // Define the main class for the application.

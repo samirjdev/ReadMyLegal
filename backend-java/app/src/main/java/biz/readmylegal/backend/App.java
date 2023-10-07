@@ -3,9 +3,12 @@
  */
 package biz.readmylegal.backend;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-@RestController
+import com.google.common.base.Charsets;
 
 public class App {
     private String test;
@@ -18,17 +21,47 @@ public class App {
         System.out.println(test);
     }
 
-<<<<<<< Updated upstream
-    public static void main(String[] args) {
-        //GPTTest.test(args[0]);
-=======
     public static void main(String[] args) throws Exception {
         HttpTest.test1();
         RequestHttp.test2();
         //GPTTest.test(tokenContents());
     }
->>>>>>> Stashed changes
 
-        System.out.println("Hello World. I am working.");
+    // Returns the contents of a token file in the home directory
+    // Do not use this in production
+    private static String tokenContents() {
+        String path = System.getProperty("user.home") + "/openai-token.txt";
+        File file = new File(path);
+        if (!file.isFile())
+            return "";
+        
+        FileInputStream inFile;
+
+        try {
+            inFile = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            return "";
+        }
+
+        String token;
+
+        try {
+            token = new String(inFile.readAllBytes(), Charsets.UTF_8).strip();
+        } catch (IOException e) {
+            try {
+                inFile.close();
+            } catch (IOException e1) {
+                return "";
+            }
+            return "";
+        }
+
+        try {
+            inFile.close();
+        } catch (IOException e) {
+            return "";
+        }
+
+        return token;
     }
 }
