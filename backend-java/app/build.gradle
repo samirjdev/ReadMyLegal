@@ -29,6 +29,7 @@ dependencies {
 application {
     // Define the main class for the application.
     mainClass = 'biz.readmylegal.backend.App'
+    //mainClass = 'biz.readmylegal.backend.GPTTest'
 }
 
 tasks.named('test') {

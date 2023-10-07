@@ -15,6 +15,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-        GPTTest.test(args[0]);
+        //GPTTest.test(args[0]);
+        System.out.println("Hello World 3");
     }
 }
