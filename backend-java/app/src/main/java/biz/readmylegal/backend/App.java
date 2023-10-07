@@ -21,7 +21,8 @@ public class App {
         System.out.println(test);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        HttpTest.test1();
         //GPTTest.test(tokenContents());
     }
 
