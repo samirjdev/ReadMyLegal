@@ -1,0 +1,78 @@
+@font-face {
+  font-family: 'A-TTF Shin Go Pro M';
+  src: url('./fonts/ShinGoPro-Medium.eot');
+  src: url('./fonts/ShinGoPro-Medium.eot?#iefix') format('embedded-opentype'),
+      url('./fonts/ShinGoPro-Medium.woff2') format('woff2'),
+      url('./fonts/ShinGoPro-Medium.woff') format('woff'),
+      url('./fonts/ShinGoPro-Medium.ttf') format('truetype'),
+      url('./fonts/ShinGoPro-Medium.svg#ShinGoPro-Medium') format('svg');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+.App {
+  text-align: center;
+  background-color: #323029;
+}
+
+.App-logo {
+  height: 10vmin;
+  pointer-events: none;
+  padding-right: 5%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #454339;
+  min-height: 5%;
+  max-height: 10%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: 'A-TTF Shin Go Pro M';
+  font-size: calc(20px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+/*@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+*/
+
+body {
+  background-color:#262020;
+}
+
+.textbox-container
+{
+  margin: 20px;
+  align-content: s
+}
+
+.textbox
+{
+  width: 30%;
+  height: 150px;
+  padding: 0.5%;
+  font-family: 'A-TTF Shin Go Pro M';
+  font-size: 16px;
+  border: 2px solid #787878;
+  border-radius: 20px;
+  line-break: normal;
+}

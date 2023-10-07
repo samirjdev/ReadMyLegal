@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'A-TTF Shin Go Pro M';
+  src: url('./fonts/ShinGoPro-Medium.eot');
+  src: url('./fonts/ShinGoPro-Medium.eot?#iefix') format('embedded-opentype'),
+      url('./fonts/ShinGoPro-Medium.woff2') format('woff2'),
+      url('./fonts/ShinGoPro-Medium.woff') format('woff'),
+      url('./fonts/ShinGoPro-Medium.ttf') format('truetype'),
+      url('./fonts/ShinGoPro-Medium.svg#ShinGoPro-Medium') format('svg');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
