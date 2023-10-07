@@ -7,9 +7,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
 
 import com.google.common.base.Charsets;
 
@@ -29,6 +26,7 @@ public class App {
     }
 
     // Returns the contents of a token file in the home directory
+    // Do not use this in production
     private static String tokenContents() {
         String path = System.getProperty("user.home") + "/openai-token.txt";
         File file = new File(path);
@@ -48,6 +46,11 @@ public class App {
         try {
             token = new String(inFile.readAllBytes(), Charsets.UTF_8).strip();
         } catch (IOException e) {
+            try {
+                inFile.close();
+            } catch (IOException e1) {
+                return "";
+            }
             return "";
         }
 

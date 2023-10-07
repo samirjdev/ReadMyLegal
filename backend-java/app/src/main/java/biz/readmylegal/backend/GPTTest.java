@@ -2,7 +2,6 @@ package biz.readmylegal.backend;
 
 import com.theokanning.openai.completion.chat.*;
 import com.theokanning.openai.service.OpenAiService;
-import com.theokanning.openai.completion.CompletionRequest;
 
 import java.time.Duration;
 import java.util.ArrayList;
