@@ -3,6 +3,13 @@
  */
 package biz.readmylegal.backend;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import com.google.common.base.Charsets;
+
 public class App {
     private String test;
 
@@ -15,7 +22,44 @@ public class App {
     }
 
     public static void main(String[] args) {
-        //GPTTest.test(args[0]);
-        System.out.println("Hello World 3");
+        GPTTest.test(tokenContents());
+    }
+
+    // Returns the contents of a token file in the home directory
+    // Do not use this in production
+    private static String tokenContents() {
+        String path = System.getProperty("user.home") + "/openai-token.txt";
+        File file = new File(path);
+        if (!file.isFile())
+            return "";
+        
+        FileInputStream inFile;
+
+        try {
+            inFile = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            return "";
+        }
+
+        String token;
+
+        try {
+            token = new String(inFile.readAllBytes(), Charsets.UTF_8).strip();
+        } catch (IOException e) {
+            try {
+                inFile.close();
+            } catch (IOException e1) {
+                return "";
+            }
+            return "";
+        }
+
+        try {
+            inFile.close();
+        } catch (IOException e) {
+            return "";
+        }
+
+        return token;
     }
 }
