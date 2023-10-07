@@ -11,19 +11,38 @@ import java.io.IOException;
 import com.google.common.base.Charsets;
 
 public class App {
-    private String test;
+    private int port;
+    private HttpBackend http;
+    private GPTBackend gpt;
 
-    public App() {
-        test = "Hello world!";
+    public App(int port) throws IOException {
+        this.port = port;
     }
 
-    public void print() {
-        System.out.println(test);
+    public int getPort() {
+        return this.port;
     }
 
-    public static void main(String[] args) throws IOException {
-        HttpBackend httpBackend = new HttpBackend(5252);
-        httpBackend.start();
+    public void start() throws IOException {
+        http = new HttpBackend(port);
+        gpt = new GPTBackend(tokenContents()); // GPTBackend constructor already starts the OpenAI connection
+        
+        http.start();
+    }
+
+    public void stop() {
+        http.stop();
+        gpt.stop();
+    }
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        App app = new App(Integer.parseInt(args[0]));
+        app.start();
+        System.out.println("Listening on 127.0.0.1:" + app.getPort());
+        Thread.sleep(120 * 1000);
+        System.out.println("Stopping execution...");
+        app.stop();
+        System.out.println("Have a nice day! :)");
     }
 
     // Returns the contents of a token file in the home directory

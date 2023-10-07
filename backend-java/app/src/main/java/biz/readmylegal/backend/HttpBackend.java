@@ -64,6 +64,10 @@ public class HttpBackend {
         server.start();
     }
 
+    public void stop() {
+        server.stop(5);
+    }
+
     /*
      * {body:"",password:""}
      */
