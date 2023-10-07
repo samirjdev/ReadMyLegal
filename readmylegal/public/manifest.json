@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Read My Legal",
+  "name": "Simplifies your legal documents",
   "icons": [
     {
       "src": "favicon.ico",

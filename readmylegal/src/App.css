@@ -57,22 +57,62 @@
 
 body {
   background-color:#262020;
+  align-items: center;
 }
 
-.textbox-container
+.main-content
 {
-  margin: 20px;
-  align-content: s
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  height: 100%;
 }
 
-.textbox
+.left-side
 {
-  width: 30%;
-  height: 150px;
+  flex: 1;
+  padding: 10px;
+}
+
+.password-container
+{
+  background-color: wheat;
+}
+.password-container
+{
   padding: 0.5%;
   font-family: 'A-TTF Shin Go Pro M';
   font-size: 16px;
   border: 2px solid #787878;
   border-radius: 20px;
-  line-break: normal;
+  white-space: break-spaces;
+}
+
+.right-side
+{
+  flex: 1;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.textbox-container
+{
+  margin: 0px;
+}
+
+.textarea
+{
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  font-family: 'A-TTF Shin Go Pro M';
+  font-size: 16px;
+  border: 2px solid #787878;
+  border-radius: 20px;
+  word-break: normal;
 }
