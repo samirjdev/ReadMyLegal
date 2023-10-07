@@ -10,7 +10,7 @@ function fetchData()
   console.log("DATA FETCHED!");
   fetch('http://localhost:5252/prompt/json',  {
     method: "POST",
-    mode: 'no-cors',
+    mode: 'cors',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
