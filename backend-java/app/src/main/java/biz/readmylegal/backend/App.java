@@ -3,6 +3,10 @@
  */
 package biz.readmylegal.backend;
 
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+
 public class App {
     private String test;
 
@@ -16,10 +20,7 @@ public class App {
 
     public static void main(String[] args) {
         //GPTTest.test(args[0]);
-<<<<<<< Updated upstream
-        System.out.println("Hello world");
-=======
-        System.out.println("Hello World 4");
->>>>>>> Stashed changes
+
+        System.out.println("Hello World. I am working.");
     }
 }

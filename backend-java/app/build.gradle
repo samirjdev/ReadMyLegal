@@ -31,10 +31,8 @@ dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
 
-<<<<<<< Updated upstream
     // https://mvnrepository.com/artifact/com.theokanning.openai-gpt3-java/service
     implementation 'com.theokanning.openai-gpt3-java:service:0.16.0'
-=======
     implementation 'io.github.reactiveclown:openai-webflux-client-spring-boot-starter:0.9.1'
 
     //This dependency is used by the SB.
@@ -42,7 +40,6 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
->>>>>>> Stashed changes
 }
 
 application {
