@@ -3,33 +3,55 @@ package biz.readmylegal.backend;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+
 
 public class HttpBackend {
     private HttpServer server;
 
     public HttpBackend(int port) throws IOException {
+        System.out.println("checkpoint");
         server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/prompt/json", (exchange -> {
+            if ("OPTIONS".equals(exchange.getRequestMethod())) {
+                exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+                exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST");
+                exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
+                exchange.sendResponseHeaders(204, -1); // Respond with a 204 No Content status
+                return;
+            }
             if ("POST".equals(exchange.getRequestMethod())) {
                 // Get JSON data and extract given text {body:text,password:text}
                 String requestBody = new String(exchange.getRequestBody().readAllBytes(), Charsets.UTF_8);
                 ObjectMapper objMapper = new ObjectMapper();
                 GPTRequest request = objMapper.readValue(requestBody, GPTRequest.class);
-                
+                System.out.println(request.getPassword());
                 if (!request.getPassword().equals("legaleaglez")) {
+                    System.out.println("OOPS");
                     exchange.sendResponseHeaders(405, -1);
                     return;
                 }
-
-                String responseText = "{\"data\": \"" + pigLatin(request.getBody()) + "\"}";
+                
+                exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+                exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST");
+                exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Accept, Content-Type");
+                
+                System.out.println("checkpoint2");
+                //String responseText = "{\"data\": \"" + pigLatin(request.getBody()) + "\"}";
+                String responseText = "{\"data\": \"" + "HELLO" + "\"}";
                 exchange.sendResponseHeaders(200, responseText.getBytes().length);
                 OutputStream output = exchange.getResponseBody();
                 output.write(responseText.getBytes());
                 output.flush();
+                System.out.println("checkpoint3");
             }
             else {
                 exchange.sendResponseHeaders(405, -1);// 405 Method Not Allowed
