@@ -23,13 +23,16 @@ dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
 
-    // https://mvnrepository.com/artifact/com.theokanning.openai-gpt3-java/service
     implementation 'com.theokanning.openai-gpt3-java:service:0.16.0'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
 }
 
 application {
     // Define the main class for the application.
     mainClass = 'biz.readmylegal.backend.App'
+    //mainClass = 'biz.readmylegal.backend.GPTTest'
 }
 
 tasks.named('test') {
