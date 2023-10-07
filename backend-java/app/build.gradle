@@ -23,7 +23,7 @@ dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
 
-    implementation 'io.github.reactiveclown:openai-webflux-client-spring-boot-starter:0.9.1'
+    implementation 'com.theokanning.openai-gpt3-java:service:0.16.0'
 }
 
 application {
