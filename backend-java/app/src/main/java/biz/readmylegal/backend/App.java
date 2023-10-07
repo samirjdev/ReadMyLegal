@@ -22,8 +22,8 @@ public class App {
     }
 
     public static void main(String[] args) throws IOException {
-        HttpTest.test1();
-        //GPTTest.test(tokenContents());
+        HttpBackend httpBackend = new HttpBackend(5252);
+        httpBackend.start();
     }
 
     // Returns the contents of a token file in the home directory
