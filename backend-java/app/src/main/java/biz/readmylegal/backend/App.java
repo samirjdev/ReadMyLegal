@@ -22,7 +22,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-        GPTTest.test(tokenContents());
+        //GPTTest.test(tokenContents());
     }
 
     // Returns the contents of a token file in the home directory
