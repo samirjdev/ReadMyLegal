@@ -16,6 +16,10 @@ public class App {
 
     public static void main(String[] args) {
         //GPTTest.test(args[0]);
+<<<<<<< Updated upstream
         System.out.println("Hello world");
+=======
+        System.out.println("Hello World 4");
+>>>>>>> Stashed changes
     }
 }

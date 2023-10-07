@@ -1,0 +1,3 @@
+Here is so far I got. First, my main folder is the "BCKEND-JAVA". Use Gridle to run the Test.
+To unstand the SB= Spring BOot, I created online Spring BOot and using it to set up the main folder. Set ip dependies and the other stuff in the build.Gridle
+
