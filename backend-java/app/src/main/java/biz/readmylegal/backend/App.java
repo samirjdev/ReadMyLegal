@@ -18,8 +18,16 @@ public class App {
         System.out.println(test);
     }
 
+<<<<<<< Updated upstream
     public static void main(String[] args) {
         //GPTTest.test(args[0]);
+=======
+    public static void main(String[] args) throws Exception {
+        HttpTest.test1();
+        RequestHttp.test2();
+        //GPTTest.test(tokenContents());
+    }
+>>>>>>> Stashed changes
 
         System.out.println("Hello World. I am working.");
     }
