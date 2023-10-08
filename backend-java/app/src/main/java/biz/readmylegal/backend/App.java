@@ -3,13 +3,8 @@
  */
 package biz.readmylegal.backend;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
-
-import com.google.common.base.Charsets;
 
 public class App {
     private int port;
@@ -48,5 +43,5 @@ public class App {
         while (!scanner.nextLine().equals("exit"));
         scanner.close();
     }
-    
+
 }
