@@ -27,7 +27,7 @@ Developed as part of the Knighthacks 2023 in Orlando, FL, ReadMyLegal.biz is des
 
 ReadMyLegal.biz was built from the ground up as a web app in mind, making it accessible from almost every modern platform that has access to the internet. Utilizing Java as the backend and JavaScript as the front end, integrating OpenAI's GPT model was a simple task. The connection between the backend and the frontend was solved by creating a REST API to handle the task of processing complex legal documents and generating detailed responses.
 
-## Knowing with style.
+## Functional style.
 
 The website has to be functional, easy-to-use, and stylish. We *spiced* it up with the latter. Leveraging React, we designed a precisely crafted interface that is not only extremely stylish but easy-to-use for everyone as well, including accessibility options.
 
