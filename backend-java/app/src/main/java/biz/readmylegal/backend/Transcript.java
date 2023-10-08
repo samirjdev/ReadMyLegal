@@ -8,7 +8,6 @@ public class Transcript {
 
     @JsonProperty("audio_url")
     private String audio_url = "";
-    
 
     @JsonProperty("id")
     private String id = ""; 
@@ -45,7 +44,7 @@ public class Transcript {
         this.audio_url = audio_url;
     }
 
-//setter for ID
+    //setter for ID
     public String getId() {
         return id;
     }
