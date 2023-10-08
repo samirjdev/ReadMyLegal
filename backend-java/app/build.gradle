@@ -37,6 +37,12 @@ dependencies {
 
     //https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core 
     implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
+
+
+
+    //https://cloud.google.com/text-to-speech/docs/create-audio-text-client-libraries#client-libraries-install-java
+    implementation 'com.google.cloud:google-cloud-texttospeech:2.28.0'
+
 }
 
 
