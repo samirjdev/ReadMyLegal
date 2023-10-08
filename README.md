@@ -57,12 +57,26 @@ We'll be developing more accessibility features in the future while providing su
 
 ## Let's set this up!
 
-- Install any dependancies with npm...
-- Compile with Java 17 and run...
-- Done!
+Here are instructions to run the server software backend and frontend.
+
+Before you start the Java server, you must have `assemblyai-token.txt` and `openai-token.txt` in your working directory, the former containing an API token for AssemblyAI, the latter containing an API token for OpenAI.
+
+Create and execute Java 17 Jar file
+
+```
+cd <repository directory>
+cd backend-java
+./gradlew shadowJar
+java -jar ./app/build/libs/rml-backend.jar 5252 <password>
+```
+
+Initialize web interface with npm
+
+```
+npm install
+npm start # Will start on port 3000
+```
 
 ## License information
 
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
-
-###### *Audio transcription currently in pre-launch phase.
