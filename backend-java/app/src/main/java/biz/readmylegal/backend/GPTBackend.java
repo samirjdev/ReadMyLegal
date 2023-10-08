@@ -21,6 +21,16 @@ public class GPTBackend {
         this.currentResponse = new LinkedList<>();
     }
 
+    final static String audioInstructions = 
+            "Give a small, succinct, and basic summary of the following audio transcript. " +
+            "It is not known in these instructions what the transcript formatting or contents " +
+            "are beyond that it involves some discussion of law and legal processes such as " +
+            "an interview between lawyer and client, some presentation discussing laws, etc. " +
+            "Give the summary in the form of a singular short paragraph, discuss what information " +
+            "was exchanged. Ignore any transcripts which make no mention of law or any legal " +
+            "process or do not appear to be transcripts of human conversation, and simply state " +
+            "that the given transcript does not fit the requirements for processing.";
+
     final static String legalInstructions = 
             "Give a small, succinct, and basic analysis of the following legal document " +
             "in a such a way that someone inexperienced with legal terms can understand it. " + 
@@ -36,13 +46,21 @@ public class GPTBackend {
 
     // Awaits response from gpt-3.5-turbo based on given prompt
     // Blocks until the response is given
-    public synchronized String promptAwaitResponse(String prompt) {
+    public synchronized String promptAwaitResponse(String prompt, String type) {
         System.out.println("Processing prompt.");
+        String instructions;
+        if (type.equals("document"))
+            instructions = legalInstructions;
+        else if (type.equals("transcript"))
+            instructions = audioInstructions;
+        else
+            return "Invalid processing typing given \"" + type + "\"";
+
 
         final List<ChatMessage> messages = new ArrayList<>();
-        final ChatMessage legalSystemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), legalInstructions);
+        final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), instructions);
         final ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), prompt);
-        messages.add(legalSystemMessage);
+        messages.add(systemMessage);
         messages.add(userMessage);
         ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
                 .builder()
