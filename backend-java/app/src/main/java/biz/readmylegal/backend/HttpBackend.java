@@ -21,10 +21,11 @@ public class HttpBackend {
         System.out.println("checkpoint");
         server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/prompt/json", (exchange -> {
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
+
             if ("OPTIONS".equals(exchange.getRequestMethod())) {
-                exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-                exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST");
-                exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
                 exchange.sendResponseHeaders(204, -1); // Respond with a 204 No Content status
                 return;
             }
@@ -40,10 +41,6 @@ public class HttpBackend {
                     return;
                 }
                 
-                exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-                exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST");
-                exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Accept, Content-Type");
-                
                 System.out.println("checkpoint2");
                 //String responseText = "{\"data\": \"" + pigLatin(request.getBody()) + "\"}";
                 String responseText = "{\"data\": \"" + "HELLO" + "\"}";
@@ -53,6 +50,7 @@ public class HttpBackend {
                 output.flush();
                 System.out.println("checkpoint3");
             }
+
             else {
                 exchange.sendResponseHeaders(405, -1);// 405 Method Not Allowed
             }
