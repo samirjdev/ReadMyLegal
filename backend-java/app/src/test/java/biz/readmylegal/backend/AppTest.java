@@ -4,11 +4,13 @@
 package biz.readmylegal.backend;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.File;
+import java.io.IOException;
 
 class AppTest {
-    @Test void appPrints() {
-        App app = new App();
-        app.print();
+    @Test void appExists() throws IOException {
+        @SuppressWarnings("unused")
+        App app = new App(12345, "legaleaglez", new File("openai-token.txt"));
     }
 }
