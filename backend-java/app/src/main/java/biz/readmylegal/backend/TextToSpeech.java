@@ -11,24 +11,19 @@ import com.google.cloud.texttospeech.v1.TextToSpeechClient;
 import com.google.cloud.texttospeech.v1.VoiceSelectionParams;
 import com.google.protobuf.ByteString;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
-
-
-
-
 
 public class TextToSpeech {
 
-    public static void textToSpeech() throws Exception{
-
+    public static void textToSpeech() throws IOException  {
         try (TextToSpeechClient textToSpeechClient = TextToSpeechClient.create()) {
             // Set the text input to be synthesized
             SynthesisInput input = SynthesisInput.newBuilder().setText("I love you!").build();
       
             // Build the voice request, select the language code ("en-US") and the ssml voice gender
             // ("neutral")
-            VoiceSelectionParams voice =
-                VoiceSelectionParams.newBuilder()
+            VoiceSelectionParams voice = VoiceSelectionParams.newBuilder()
                     .setLanguageCode("en-US")
                     .setSsmlGender(SsmlVoiceGender.NEUTRAL)
                     .build();
@@ -47,10 +42,10 @@ public class TextToSpeech {
       
             // Write the response to the output file.
             try (OutputStream out = new FileOutputStream("output.mp3")) {
-              out.write(audioContents.toByteArray());
-              System.out.println("Audio content written to file \"output.mp3\"");
+                out.write(audioContents.toByteArray());
+                System.out.println("Audio content written to file \"output.mp3\"");
             }
-          }
+        }
 
 
 

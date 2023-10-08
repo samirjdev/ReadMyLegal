@@ -2,7 +2,7 @@ package biz.readmylegal.backend;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GPTRequest {
+public class RMLRequest {
     @JsonProperty("body")
     private String body;
 

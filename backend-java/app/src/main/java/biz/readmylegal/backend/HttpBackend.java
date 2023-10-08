@@ -1,8 +1,6 @@
 package biz.readmylegal.backend;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
@@ -12,16 +10,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
 import com.sun.net.httpserver.HttpServer;
 
-
 public class HttpBackend {
     private HttpServer server;
+    private AssemblyAIBackend aaiBackend;
     private GPTBackend gptBackend;
     private String password;
-    private File tokenFile;
 
-    public HttpBackend(int port, String password, File tokenFile) throws IOException {
+    public HttpBackend(int port, String password) throws IOException {
         this.password = password;
-        this.tokenFile = tokenFile;
+        aaiBackend = new AssemblyAIBackend();
         server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/prompt/json", (exchange -> {
             exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
@@ -36,14 +33,22 @@ public class HttpBackend {
                 // Get JSON data and extract given text {body:text,password:text}
                 String requestBody = new String(exchange.getRequestBody().readAllBytes(), Charsets.UTF_8);
                 ObjectMapper objMapper = new ObjectMapper();
-                GPTRequest request = objMapper.readValue(requestBody, GPTRequest.class);
+                RMLRequest request = objMapper.readValue(requestBody, RMLRequest.class);
                 if (!request.getPassword().equals(this.password)) {
                     exchange.sendResponseHeaders(405, -1);
                     return;
                 }
                 System.out.println("Received prompt.");
 
-                String responseString = gptBackend.promptAwaitResponse(request.getBody(), request.getType());
+                String requestString;
+                if (request.getType().equals("document"))
+                    requestString = request.getBody();
+                else if (request.getType().equals("transcript"))
+                    requestString = aaiBackend.getTranscript(request.getBody());
+                else
+                    return;
+
+                String responseString = gptBackend.promptAwaitResponse(requestString, request.getType());
                 GPTResponse response = new GPTResponse(responseString);
                 String responseJson = objMapper.writeValueAsString(response);
 
@@ -66,7 +71,7 @@ public class HttpBackend {
 
     public void start() throws IOException {
         server.start();
-        gptBackend = new GPTBackend(Files.readString(this.tokenFile.toPath()).trim());
+        gptBackend = new GPTBackend(Files.readString(new File("openai-token.txt").toPath()).trim());
     }
 
     public void stop() {

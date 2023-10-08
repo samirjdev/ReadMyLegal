@@ -180,6 +180,13 @@ body {
   align-content: center;
 }
 
+.typelol
+{
+  font-family: 'A-TTF Shin Go Pro M';
+  font-size: 16px;
+  color: white;
+}
+
 #load-container {
   display: none;
   justify-content: center; /* Horizontal centering */

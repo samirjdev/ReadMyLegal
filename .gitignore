@@ -33,3 +33,5 @@ hs_err_pid*
 replay_pid*
 *.class
 backend-java/app/bin/main/biz/readmylegal/.DS_Store
+backend-java/app/assemblyai-token.txt
+*.class
