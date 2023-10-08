@@ -7,60 +7,46 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 import com.google.common.base.Charsets;
 
 public class App {
-    private String test;
+    private int port;
+    private HttpBackend http;
 
-    public App() {
-        test = "Hello world!";
+    public App(int port) throws IOException {
+        this.port = port;
     }
 
-    public void print() {
-        System.out.println(test);
+    public int getPort() {
+        return this.port;
+    }
+
+    public void start() throws IOException {
+        http = new HttpBackend(port);
+        http.start();
+    }
+
+    public void stop() {
+        http.stop();
     }
 
     public static void main(String[] args) throws IOException {
-        HttpBackend httpBackend = new HttpBackend(5252);
-        httpBackend.start();
+        App app = new App(Integer.parseInt(args[0]));
+        app.start();
+        System.out.println("Listening on 127.0.0.1:" + app.getPort());
+        System.out.println("Type `exit` to close the server.");
+        awaitExit();
+        System.out.println("Closing server, please wait...");
+        app.stop();
+        System.out.println("Have a nice day!");
     }
 
-    // Returns the contents of a token file in the home directory
-    // Do not use this in production
-    private static String tokenContents() {
-        String path = System.getProperty("user.home") + "/openai-token.txt";
-        File file = new File(path);
-        if (!file.isFile())
-            return "";
-        
-        FileInputStream inFile;
-
-        try {
-            inFile = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            return "";
-        }
-
-        String token;
-
-        try {
-            token = new String(inFile.readAllBytes(), Charsets.UTF_8).strip();
-        } catch (IOException e) {
-            try {
-                inFile.close();
-            } catch (IOException e1) {
-                return "";
-            }
-            return "";
-        }
-
-        try {
-            inFile.close();
-        } catch (IOException e) {
-            return "";
-        }
-
-        return token;
+    private static void awaitExit() {
+        Scanner scanner = new Scanner(System.in);
+        while (!scanner.nextLine().equals("exit"));
+        scanner.close();
     }
+    
 }

@@ -1,5 +1,8 @@
 package biz.readmylegal.backend;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
@@ -16,9 +19,9 @@ import com.sun.net.httpserver.HttpServer;
 
 public class HttpBackend {
     private HttpServer server;
+    private GPTBackend gptBackend;
 
     public HttpBackend(int port) throws IOException {
-        System.out.println("checkpoint");
         server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/prompt/json", (exchange -> {
             exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
@@ -34,21 +37,16 @@ public class HttpBackend {
                 String requestBody = new String(exchange.getRequestBody().readAllBytes(), Charsets.UTF_8);
                 ObjectMapper objMapper = new ObjectMapper();
                 GPTRequest request = objMapper.readValue(requestBody, GPTRequest.class);
-                System.out.println(request.getPassword());
                 if (!request.getPassword().equals("legaleaglez")) {
-                    System.out.println("OOPS");
                     exchange.sendResponseHeaders(405, -1);
                     return;
                 }
                 
-                System.out.println("checkpoint2");
-                //String responseText = "{\"data\": \"" + pigLatin(request.getBody()) + "\"}";
-                String responseText = "{\"data\": \"" + "HELLO" + "\"}";
-                exchange.sendResponseHeaders(200, responseText.getBytes().length);
+                GPTResponse response = new GPTResponse(gptBackend.promptAwaitResponse(request.getBody()));
+                exchange.sendResponseHeaders(200, response.getResponse().getBytes().length);
                 OutputStream output = exchange.getResponseBody();
-                output.write(responseText.getBytes());
+                output.write(response.getResponse().getBytes());
                 output.flush();
-                System.out.println("checkpoint3");
             }
 
             else {
@@ -60,6 +58,12 @@ public class HttpBackend {
 
     public void start() {
         server.start();
+        gptBackend = new GPTBackend(tokenContents());
+    }
+
+    public void stop() {
+        server.stop(5);
+        gptBackend.stop();
     }
 
     /*
@@ -91,5 +95,43 @@ public class HttpBackend {
     private static boolean isVowel(char c) {
         c = Character.toLowerCase(c);
         return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+    }
+
+    // Returns the contents of a token file in the home directory
+    // Do not use this in production
+    private static String tokenContents() {
+        String path = System.getProperty("user.home") + "/openai-token.txt";
+        File file = new File(path);
+        if (!file.isFile())
+            return "";
+        
+        FileInputStream inFile;
+
+        try {
+            inFile = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            return "";
+        }
+
+        String token;
+
+        try {
+            token = new String(inFile.readAllBytes(), Charsets.UTF_8).strip();
+        } catch (IOException e) {
+            try {
+                inFile.close();
+            } catch (IOException e1) {
+                return "";
+            }
+            return "";
+        }
+
+        try {
+            inFile.close();
+        } catch (IOException e) {
+            return "";
+        }
+
+        return token;
     }
 }
