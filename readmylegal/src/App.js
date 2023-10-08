@@ -3,6 +3,7 @@ import './App.css';
 import loader from "./resources/loading.gif";
 import { useState } from 'react';
 
+var requestType = 'document';
 var hasFile = false;
 var bodyValue;
 function fetchData()
@@ -28,7 +29,7 @@ function fetchData()
     body: JSON.stringify({
       body: bodyValue,
       password: passwordValue,
-      type: "document"
+      type: requestType
     })
   })
     .then(response => {
@@ -47,10 +48,25 @@ function fetchData()
     });
 }
 
+function OnTypeSelect()
+{
+  var radios = document.getElementsByName('request-type');
+  var val= "";
+  for (var i = 0, length = radios.length; i < length; i++) {
+      if (radios[i].checked) {
+         val = radios[i].value; 
+         break;
+       }
+  }
+  
+  requestType = val;
+  console.log(val);
+}
+
 function OnDrop()
 {
   const textarea = document.getElementById("textarea");
-  textarea.readOnly = true;
+  //textarea.readOnly = true;
   const fileInput = document.getElementById('myfile'); // Your file input element
   fileInput.addEventListener('change', async (event) => {
     const selectedFile = event.target.files[0];
@@ -59,6 +75,7 @@ function OnDrop()
         hasFile = true;
         const fileContent = await readFile(selectedFile);
         bodyValue = fileContent;
+        textarea.value = bodyValue;
         console.log(bodyValue + "1");
       } catch (error) {
         console.error('Error reading the file:', error);
@@ -114,11 +131,13 @@ function App() {
               <input type="text" id="password" name="password" className="password-input" placeholder="Enter your pasword" required></input>
             </form>
           </div>
+          <input type="file" id="myfile" className="myfile" onClick={OnDrop}/>
+          <input type="radio" id="typelol1" className="typelol" name="request-type" value="document" onClick={OnTypeSelect}/><t className="typelol">Legal document</t>
+          <input type="radio" id="typelol2" className="typelol" name="request-type" value="transcript" onClick={OnTypeSelect}/><t className="typelol">Audio Recording</t>
           <p className="textbox-container">
             <textarea id="textarea" className="textarea" rows="4" cols="60" placeholder="Data to Send"></textarea>
           </p>
-          <input type="file" id="myfile" className="myfile" onClick={OnDrop}/>
-        <button className="submit" onClick={fetchData}>Fetch Some Data</button>
+        <button className="submit" onClick={fetchData}>Analyze</button>
         </div>
       </div>
       <div className="low-content">
