@@ -4,6 +4,11 @@
 package biz.readmylegal.backend;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import com.google.common.base.Charsets;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -32,7 +37,7 @@ public class App {
         http.stop();
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         // Args: port password tokenpath
         App app = new App(Integer.parseInt(args[0]), args[1], new File(args[2]));
         app.start();
@@ -42,6 +47,11 @@ public class App {
         System.out.println("Closing server, please wait...");
         app.stop();
         System.out.println("Have a nice day!");
+
+        //Speech to text 
+       //RequestHttp.test2();
+        //Text to Speech
+       // TextToSpeech.textToSpeech();
     }
 
     private static void awaitExit() {
