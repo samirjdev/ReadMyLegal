@@ -6,14 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 
@@ -41,13 +36,18 @@ public class HttpBackend {
                     exchange.sendResponseHeaders(405, -1);
                     return;
                 }
-                
+                System.out.println("Received prompt.");
                 GPTResponse response = new GPTResponse(gptBackend.promptAwaitResponse(request.getBody()));
                 String responseJson = objMapper.writeValueAsString(response);
+
+                System.out.println("Sending GPT-3.5 response to " + 
+                        exchange.getRemoteAddress().getHostString() + ":" + 
+                        exchange.getRemoteAddress().getPort());
                 exchange.sendResponseHeaders(200, responseJson.getBytes().length);
                 OutputStream output = exchange.getResponseBody();
                 output.write(responseJson.getBytes());
                 output.flush();
+                System.out.println("GPT-3.5 response successfully sent.");
             }
 
             else {

@@ -4,12 +4,12 @@
 package biz.readmylegal.backend;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 
 class AppTest {
     @Test void appExists() throws IOException {
+        @SuppressWarnings("unused")
         App app = new App(12345);
     }
 }
