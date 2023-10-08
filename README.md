@@ -73,6 +73,8 @@ java -jar ./app/build/libs/rml-backend.jar 5252 <password>
 Initialize web interface with npm
 
 ```
+cd <repository directory>
+cd readmylegal
 npm install
 npm start # Will start on port 3000
 ```
