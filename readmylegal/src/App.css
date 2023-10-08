@@ -203,4 +203,5 @@ body {
   align-items: left;
   text-align: left;
   color: white;
+  white-space: pre;
 }
