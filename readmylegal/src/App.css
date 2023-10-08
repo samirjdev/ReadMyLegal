@@ -88,12 +88,13 @@ body {
 .low-content
 {
   display: flex;
-  justify-content: normal;
+  justify-content: center;
   align-items: center;
   padding: 20px;
-  padding-top: 200px;
+  padding-top: 50px;
   height: 100%;
   min-width: 100%;
+  background-color: #262020;
 }
 
 .left-screen
@@ -114,14 +115,18 @@ body {
 
 .password-container
 {
-  width: 90%;
+  width: 70%;
   background-color: wheat;
+  display: flex; /* Add this to use Flexbox */
+  flex-direction: row; /* To align items vertically */
   align-items: center;
+  justify-content: center;
   font-family: 'A-TTF Shin Go Pro M';
   font-size: 16px;
   border: 2px solid #787878;
   border-radius: 20px;
   white-space: break-spaces;
+  padding: 10px; /* Add padding for spacing */
 }
 
 .right-screen
@@ -173,4 +178,22 @@ body {
   transition: background-color 0.3s;
   color: white;
   align-content: center;
+}
+
+#load-container {
+  display: none;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+  height: 0vh; /* 100% of the viewport height */
+
+}
+
+#output
+{
+  padding: 5%;
+  font-family: 'A-TTF Shin Go Pro M';
+  font-size: 30px;
+  align-items: center;
+  text-align: center;
+  color: white;
 }

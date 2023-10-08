@@ -1,11 +1,13 @@
 import logo from './resources/AI_logo_darkmode.png';
 import './App.css';
+import loader from "./resources/loading.gif";
 import { useState } from 'react';
 
 var hasFile = false;
 var bodyValue;
 function fetchData()
 {
+  document.getElementById('load-container').style.display = 'flex';
   if (!hasFile)
   {
     var body = document.getElementById("textarea");
@@ -37,7 +39,8 @@ function fetchData()
       return response.json();
     })
     .then(data => {
-      document.getElementById('outputarea').value = data.response;
+      document.getElementById('load-container').style.display = 'none';
+      document.getElementById('output').innerHTML = data.response;
     })
     .catch(error => {
       console.error('Error:', error);
@@ -119,8 +122,10 @@ function App() {
         </div>
       </div>
       <div className="low-content">
-        <p className="textbox-container">
-            <textarea id="outputarea" className="textarea" rows="4" cols="60" placeholder="Fetch Data Displays Here" readOnly></textarea>
+        <div id="load-container">
+          <img src={loader} id="load" alt="Loading..." />
+        </div>
+        <p id="output" className="textbox-container">
         </p>
       </div>
     </div>
