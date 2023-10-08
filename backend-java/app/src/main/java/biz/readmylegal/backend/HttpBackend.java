@@ -43,9 +43,10 @@ public class HttpBackend {
                 }
                 
                 GPTResponse response = new GPTResponse(gptBackend.promptAwaitResponse(request.getBody()));
-                exchange.sendResponseHeaders(200, response.getResponse().getBytes().length);
+                String responseJson = objMapper.writeValueAsString(response);
+                exchange.sendResponseHeaders(200, responseJson.getBytes().length);
                 OutputStream output = exchange.getResponseBody();
-                output.write(response.getResponse().getBytes());
+                output.write(responseJson.getBytes());
                 output.flush();
             }
 
