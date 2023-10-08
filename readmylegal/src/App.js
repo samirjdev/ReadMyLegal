@@ -1,9 +1,20 @@
 import logo from './resources/AI_logo_darkmode.png';
 import './App.css';
+import { useState } from 'react';
 
+var hasFile = false;
 function fetchData()
 {
-  var body = document.getElementById("textarea");
+  if (hasFile)
+  {
+    var body = document.getElementById("myfile");
+    console.log("Using File");
+  }
+  else
+  {
+    var body = document.getElementById("textarea");
+    console.log("Using Text");
+  }
   var bodyValue = body.value;
   var password = document.getElementById("password");
   var passwordValue = password.value;
@@ -17,7 +28,8 @@ function fetchData()
     },
     body: JSON.stringify({
       body: bodyValue,
-      password: passwordValue
+      password: passwordValue,
+      type: "document"
     })
   })
     .then(response => {
@@ -33,11 +45,35 @@ function fetchData()
     .catch(error => {
       console.error('Error:', error);
     });
+}
 
-  //getData();
+function OnDrop()
+{
+  const textarea = document.getElementById("textarea");
+  textarea.readOnly = true;
 }
 
 function App() {
+  const onUpload = (files) =>
+  {
+    console.log(files);
+  };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const fileInput = document.getElementById('myfile');
+    function handleFileSelection(event) {
+      const selectedFile = event.target.files[0];
+      console.log("CHECKPOINT")
+      if (selectedFile) {
+        OnDrop();
+      }
+    }
+    if(fileInput)
+    {
+      fileInput.addEventListener('change', handleFileSelection);
+    }
+  });
+
   return (
     <div className="App">
       <div id="topHeader">
@@ -57,9 +93,6 @@ function App() {
           </p>
         </div>
         <div className="right-screen">
-          <div id="dragdrop" ondrop="dropHandler(event);">
-            <p>Drag and Drop them files <i>drop zone</i> </p>
-          </div>
           <div className="password-container">
             <form>
               <label className="password-label" htmlFor="password">Password: </label>
@@ -69,11 +102,14 @@ function App() {
           <p className="textbox-container">
             <textarea id="textarea" className="textarea" rows="4" cols="60" placeholder="Data to Send"></textarea>
           </p>
-          <button className="submit" onClick={fetchData}>Fetch Some Data</button>
-          <p className="textbox-container">
-            <textarea id="outputarea" className="textarea" rows="4" cols="60" placeholder="Fetch Data Displays Here" readOnly></textarea>
-          </p>
+          <input type="file" id="myfile" className="myfile" onClick={OnDrop}/>
+        <button className="submit" onClick={fetchData}>Fetch Some Data</button>
         </div>
+      </div>
+      <div className="low-content">
+        <p className="textbox-container">
+            <textarea id="outputarea" className="textarea" rows="4" cols="60" placeholder="Fetch Data Displays Here" readOnly></textarea>
+        </p>
       </div>
     </div>
   );

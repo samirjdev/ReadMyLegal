@@ -29,7 +29,7 @@ body {
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    /*animation: App-logo-spin infinite 20s linear;*/
   }
 }
 
@@ -68,7 +68,10 @@ body {
 {
   padding: 10px 10px;
   border-radius: 10px;
+  align-content: center;
+  justify-content: center;
   height: auto;
+  display: flex;
   font-size: 16px;
   font-family: 'A-TTF Shin Go Pro M';
 }
@@ -80,6 +83,17 @@ body {
   padding: 20px;
   padding-top: 200px;
   height: 100%;
+}
+
+.low-content
+{
+  display: flex;
+  justify-content: normal;
+  align-items: center;
+  padding: 20px;
+  padding-top: 200px;
+  height: 100%;
+  min-width: 100%;
 }
 
 .left-screen
@@ -132,4 +146,31 @@ body {
   border: 2px solid #787878;
   border-radius: 20px;
   word-break: normal;
+}
+
+.drop-box
+{
+  width: 90%;
+  height: 75%;
+  border: 2px solid #ccc;
+  color: white;
+  font-family: 'A-TTF Shin Go Pro M';
+  font-size: 16px;
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.myfile
+{
+  padding: 10px 10px;
+  border-radius: 5px;
+  font-family: 'A-TTF Shin Go Pro M';
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: white;
+  align-content: center;
 }
