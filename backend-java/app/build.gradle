@@ -9,6 +9,8 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+
+    id "com.github.johnrengelman.shadow" version "8.1.1"
 }
 
 repositories {
@@ -42,4 +44,10 @@ tasks.named('test') {
 
 run {
     args = ['5252']
+}
+
+shadowJar {
+   archiveBaseName.set('rml-backend')
+   archiveClassifier.set('')
+   archiveVersion.set('')
 }
