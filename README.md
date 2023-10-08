@@ -55,10 +55,14 @@ Thank you, Knighthacks 2023!
 
 We'll be developing more accessibility features in the future while providing support for more file types such as .doc, .docx. We will also continue to brush up on our software development knowledge and continue to advocate for the growth of legal awareness.
 
-###### *Audio transcription currently in pre-launch phase.
-
-# 
-
 ## Let's set this up!
 
+- Install any dependancies with npm...
+- Compile with Java 17 and run...
+- Done!
+
 ## License information
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+###### *Audio transcription currently in pre-launch phase.
