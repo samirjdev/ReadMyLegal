@@ -200,7 +200,7 @@ body {
   padding: 5%;
   font-family: 'A-TTF Shin Go Pro M';
   font-size: 30px;
-  align-items: center;
-  text-align: center;
+  align-items: left;
+  text-align: left;
   color: white;
 }
