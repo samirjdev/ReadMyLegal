@@ -3,15 +3,20 @@
  */
 package biz.readmylegal.backend;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class App {
     private int port;
+    private String password;
     private HttpBackend http;
+    private File tokenFile;
 
-    public App(int port) throws IOException {
+    public App(int port, String password, File tokenFile) throws IOException {
         this.port = port;
+        this.password = password;
+        this.tokenFile = tokenFile;
     }
 
     public int getPort() {
@@ -19,7 +24,7 @@ public class App {
     }
 
     public void start() throws IOException {
-        http = new HttpBackend(port);
+        http = new HttpBackend(port, password, tokenFile);
         http.start();
     }
 
@@ -28,7 +33,8 @@ public class App {
     }
 
     public static void main(String[] args) throws IOException {
-        App app = new App(Integer.parseInt(args[0]));
+        // Args: port password tokenpath
+        App app = new App(Integer.parseInt(args[0]), args[1], new File(args[2]));
         app.start();
         System.out.println("Listening on 127.0.0.1:" + app.getPort());
         System.out.println("Type `exit` to close the server.");

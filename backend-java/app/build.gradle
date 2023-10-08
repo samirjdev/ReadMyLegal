@@ -43,7 +43,7 @@ tasks.named('test') {
 }
 
 run {
-    args = ['5252']
+    args = ['5252', 'legaleaglez', 'openai-token.txt']
     standardInput = System.in
 }
 

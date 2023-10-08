@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.nio.file.Files;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
@@ -15,8 +16,12 @@ import com.sun.net.httpserver.HttpServer;
 public class HttpBackend {
     private HttpServer server;
     private GPTBackend gptBackend;
+    private String password;
+    private File tokenFile;
 
-    public HttpBackend(int port) throws IOException {
+    public HttpBackend(int port, String password, File tokenFile) throws IOException {
+        this.password = password;
+        this.tokenFile = tokenFile;
         server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/prompt/json", (exchange -> {
             exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
@@ -32,12 +37,14 @@ public class HttpBackend {
                 String requestBody = new String(exchange.getRequestBody().readAllBytes(), Charsets.UTF_8);
                 ObjectMapper objMapper = new ObjectMapper();
                 GPTRequest request = objMapper.readValue(requestBody, GPTRequest.class);
-                if (!request.getPassword().equals("legaleaglez")) {
+                if (!request.getPassword().equals(this.password)) {
                     exchange.sendResponseHeaders(405, -1);
                     return;
                 }
                 System.out.println("Received prompt.");
-                GPTResponse response = new GPTResponse(gptBackend.promptAwaitResponse(request.getBody()));
+
+                String responseString = gptBackend.promptAwaitResponse(request.getBody(), request.getType());
+                GPTResponse response = new GPTResponse(responseString);
                 String responseJson = objMapper.writeValueAsString(response);
 
                 System.out.println("Sending GPT-3.5 response to " + 
@@ -57,82 +64,13 @@ public class HttpBackend {
         server.setExecutor(null);
     }
 
-    public void start() {
+    public void start() throws IOException {
         server.start();
-        gptBackend = new GPTBackend(tokenContents());
+        gptBackend = new GPTBackend(Files.readString(this.tokenFile.toPath()).trim());
     }
 
     public void stop() {
         server.stop(5);
         gptBackend.stop();
-    }
-
-    /*
-     * {body:"",password:""}
-     */
-
-    
-    public static String pigLatin(String input) {
-        if (input == null || input.isEmpty()) {
-            return "";
-        }
-
-        String[] words = input.split("\\s+");
-        StringBuilder pigLatinSentence = new StringBuilder();
-
-        for (String word : words) {
-            char firstChar = word.charAt(0);
-            if (isVowel(firstChar)) {
-                pigLatinSentence.append(word).append("way ");
-            } else {
-                pigLatinSentence.append(word.substring(1)).append(firstChar).append("ay ");
-            }
-        }
-
-        // Remove the trailing space and return the Pig Latin sentence
-        return pigLatinSentence.toString().trim();
-    }
-
-    private static boolean isVowel(char c) {
-        c = Character.toLowerCase(c);
-        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
-    }
-
-    // Returns the contents of a token file in the home directory
-    // Do not use this in production
-    private static String tokenContents() {
-        String path = System.getProperty("user.home") + "/openai-token.txt";
-        File file = new File(path);
-        if (!file.isFile())
-            return "";
-        
-        FileInputStream inFile;
-
-        try {
-            inFile = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            return "";
-        }
-
-        String token;
-
-        try {
-            token = new String(inFile.readAllBytes(), Charsets.UTF_8).strip();
-        } catch (IOException e) {
-            try {
-                inFile.close();
-            } catch (IOException e1) {
-                return "";
-            }
-            return "";
-        }
-
-        try {
-            inFile.close();
-        } catch (IOException e) {
-            return "";
-        }
-
-        return token;
     }
 }
