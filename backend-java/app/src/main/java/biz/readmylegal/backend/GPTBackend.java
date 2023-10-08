@@ -32,7 +32,7 @@ public class GPTBackend {
             " document which are important or should otherwise be noted if the prior two " +
             "categories aren't sufficient. If the provided document or text has nothing to do" +
             "with any kind of legal agreement or notice, simply express that it's not a legal " +
-            " document and don't attempt any further analysis.";
+            "document and don't attempt any further analysis.";
 
     // Awaits response from gpt-3.5-turbo based on given prompt
     // Blocks until the response is given
@@ -40,9 +40,9 @@ public class GPTBackend {
         System.out.println("Processing prompt.");
 
         final List<ChatMessage> messages = new ArrayList<>();
-        final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), legalInstructions);
+        final ChatMessage legalSystemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), legalInstructions);
         final ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), prompt);
-        messages.add(systemMessage);
+        messages.add(legalSystemMessage);
         messages.add(userMessage);
         ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
                 .builder()
