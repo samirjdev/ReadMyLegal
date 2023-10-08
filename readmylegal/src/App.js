@@ -3,19 +3,16 @@ import './App.css';
 import { useState } from 'react';
 
 var hasFile = false;
+var bodyValue;
 function fetchData()
 {
-  if (hasFile)
-  {
-    var body = document.getElementById("myfile");
-    console.log("Using File");
-  }
-  else
+  if (!hasFile)
   {
     var body = document.getElementById("textarea");
+    bodyValue = body.value;
     console.log("Using Text");
   }
-  var bodyValue = body.value;
+  console.log(bodyValue + "2");
   var password = document.getElementById("password");
   var passwordValue = password.value;
   console.log("DATA FETCHED!");
@@ -51,6 +48,36 @@ function OnDrop()
 {
   const textarea = document.getElementById("textarea");
   textarea.readOnly = true;
+  const fileInput = document.getElementById('myfile'); // Your file input element
+  fileInput.addEventListener('change', async (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      try {
+        hasFile = true;
+        const fileContent = await readFile(selectedFile);
+        bodyValue = fileContent;
+        console.log(bodyValue + "1");
+      } catch (error) {
+        console.error('Error reading the file:', error);
+      }
+    }
+  });
+}
+
+function readFile(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      resolve(event.target.result);
+    };
+
+    reader.onerror = (error) => {
+      reject(error);
+    };
+
+    reader.readAsText(file);
+  });
 }
 
 function App() {
@@ -58,21 +85,6 @@ function App() {
   {
     console.log(files);
   };
-
-  document.addEventListener('DOMContentLoaded', function () {
-    const fileInput = document.getElementById('myfile');
-    function handleFileSelection(event) {
-      const selectedFile = event.target.files[0];
-      console.log("CHECKPOINT")
-      if (selectedFile) {
-        OnDrop();
-      }
-    }
-    if(fileInput)
-    {
-      fileInput.addEventListener('change', handleFileSelection);
-    }
-  });
 
   return (
     <div className="App">
