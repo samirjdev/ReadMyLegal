@@ -28,7 +28,7 @@ function fetchData()
       return response.json();
     })
     .then(data => {
-      document.getElementById('outputarea').value = data.data;
+      document.getElementById('outputarea').value = data.response;
     })
     .catch(error => {
       console.error('Error:', error);
@@ -36,32 +36,7 @@ function fetchData()
 
   //getData();
 }
-/*
-function getData()
-{
-  fetch('http://localhost:5252/prompt/json',  {
-    method: "GET",
-    mode: 'cors',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(response => {
-      if (!response.ok)
-      {
-        throw new Error('Network response was not okay!');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-}
-*/
+
 function App() {
   return (
     <div className="App">
@@ -75,8 +50,16 @@ function App() {
       </div>
       <div className="main-content">
         <div className="left-screen">
+          <p className="leftpar">
+            Introducing our GPT 3.5 powered Legal Document Reader, your key to effortless understanding of your rights, responsibilites, and crucial information in legal documents.
+            Our advanced AI technology simplifies complex legal language, providing you with clarity, efficiency, and customized insights tailored towards your needs. Know
+            your rights and take control of your information. Visit our cutting-edge legal documents analyzers with a PDF files or text to find out today.
+          </p>
         </div>
         <div className="right-screen">
+          <div id="dragdrop" ondrop="dropHandler(event);">
+            <p>Drag and Drop them files <i>drop zone</i> </p>
+          </div>
           <div className="password-container">
             <form>
               <label className="password-label" htmlFor="password">Password: </label>
@@ -85,8 +68,8 @@ function App() {
           </div>
           <p className="textbox-container">
             <textarea id="textarea" className="textarea" rows="4" cols="60" placeholder="Data to Send"></textarea>
-            <button className="submit" onClick={fetchData}>Fetch Some Data</button>
           </p>
+          <button className="submit" onClick={fetchData}>Fetch Some Data</button>
           <p className="textbox-container">
             <textarea id="outputarea" className="textarea" rows="4" cols="60" placeholder="Fetch Data Displays Here" readOnly></textarea>
           </p>

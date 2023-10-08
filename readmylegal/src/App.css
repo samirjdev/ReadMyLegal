@@ -11,6 +11,11 @@
   font-display: swap;
 }
 
+body {
+  background-color:#262020;
+  align-items: center;
+}
+
 .App {
   text-align: center;
   background-color: #323029;
@@ -30,8 +35,12 @@
 
 .App-header {
   background-color: #454339;
-  min-height: 5%;
-  max-height: 10%;
+  /*min-height: 5%;*/
+  position: fixed;
+  /*max-height: 10%;*/
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -45,7 +54,7 @@
   color: #61dafb;
 }
 
-/*@keyframes App-logo-spin {
+@keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
@@ -53,20 +62,15 @@
     transform: rotate(360deg);
   }
 }
-*/
+
 
 .submit
 {
-  padding-block: 10px;
+  padding: 10px 10px;
   border-radius: 10px;
   height: auto;
   font-size: 16px;
   font-family: 'A-TTF Shin Go Pro M';
-}
-
-body {
-  background-color:#262020;
-  align-items: center;
 }
 
 .main-content
@@ -74,26 +78,31 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 20px;
-  top: 0px;
-  right: 0px;
-  left: 0px;
-  bottom: 0px;
+  padding-top: 200px;
   height: 100%;
 }
 
-.left-side
+.left-screen
 {
   flex: 1;
+  min-width: 50%;
   padding: 10px;
+}
+
+.leftpar
+{
+  padding: 0.5%;
+  font-family: 'A-TTF Shin Go Pro M';
+  font-size: 25px;
+  text-align: center;
+  color: white;
 }
 
 .password-container
 {
+  width: 90%;
   background-color: wheat;
-}
-.password-container
-{
-  padding: 0.5%;
+  align-items: center;
   font-family: 'A-TTF Shin Go Pro M';
   font-size: 16px;
   border: 2px solid #787878;
@@ -101,22 +110,21 @@ body {
   white-space: break-spaces;
 }
 
-.right-side
+.right-screen
 {
   flex: 1;
   padding: 10px;
-  justify-content: center;
-  align-items: center;
+  min-width: 50%;
 }
 
 .textbox-container
 {
-  margin: 0px;
+  margin: 20px;
 }
 
 .textarea
 {
-  width: 100%;
+  width: 90%;
   height: 150px;
   padding: 10px;
   font-family: 'A-TTF Shin Go Pro M';
