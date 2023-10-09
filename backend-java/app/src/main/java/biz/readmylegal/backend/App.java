@@ -39,6 +39,7 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         // Args: port password tokenpath
+        /*
         App app = new App(Integer.parseInt(args[0]), args[1], new File(args[2]));
         app.start();
         System.out.println("Listening on 127.0.0.1:" + app.getPort());
@@ -47,11 +48,19 @@ public class App {
         System.out.println("Closing server, please wait...");
         app.stop();
         System.out.println("Have a nice day!");
-
+         */
+        //RequestHttp.test2();
         //Speech to text 
        //RequestHttp.test2();
         //Text to Speech
-       // TextToSpeech.textToSpeech();
+        String text = RequestHttp.test2();
+
+        System.out.println(text);
+        System.out.println("");
+        String twoFalf = text.substring(0, 4900);
+
+      // String finalText = "Hello World.";
+       TextToSpeech.LongtextToSpeech(twoFalf);
     }
 
     private static void awaitExit() {

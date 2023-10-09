@@ -1,5 +1,6 @@
 package biz.readmylegal.backend;
 
+import java.io.File;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -7,14 +8,18 @@ import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.nio.file.Files;
-import java.io.File;
-import java.lang.Thread;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class RequestHttp {
 
-    public static void test2() throws Exception{
+    public String myString;
+    
+
+    public static String test2() throws Exception{
+
+        String myString;
+
 
         Transcript transcript = new Transcript();
         transcript.setAudio_url("https://drive.google.com/uc?export=download&id=13VKm5sF3kC5_99uyDPrY9VFSwuIwpBXV");
@@ -22,12 +27,12 @@ public class RequestHttp {
     
         //convert transcript inot Json
         ObjectMapper objectmapper = new ObjectMapper();
-
+        //System.out.println("I am Here");   
         String json = objectmapper.writeValueAsString(transcript);
          //System.out.println("I am here Right NOW ");
         //pring the Set audio Url
         System.out.println();
-        System.out.println(json);
+        //System.out.println(json);
         System.out.println();
 
 
@@ -65,6 +70,8 @@ public class RequestHttp {
 
         transcript = objectmapper.readValue(getResponse.body(), Transcript.class);
 
+        
+
         System.out.println(transcript.getStatus());
 
         if("completed".equals(transcript.getStatus() )|| "error".equals(transcript.getStatus())){
@@ -75,9 +82,17 @@ public class RequestHttp {
      }
 
      System.out.println("Transcription Completed ");
-     System.out.println(transcript.getText());
+     //System.out.println(transcript.getText());
 
+     myString = transcript.getText();
 
+     return myString;
+    }
+
+    
+
+    void ClassA (String myString) {
+        this.myString = myString;
     }
     
 }
