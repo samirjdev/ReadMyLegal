@@ -121,7 +121,7 @@ function App() {
           <p className="leftpar">
             Introducing our GPT 3.5 powered Legal Document Reader, your key to effortless understanding of your rights, responsibilites, and crucial information in legal documents.
             Our advanced AI technology simplifies complex legal language, providing you with clarity, efficiency, and customized insights tailored towards your needs. Know
-            your rights and take control of your information. Visit our cutting-edge legal documents analyzers with a PDF files or text to find out today.
+            your rights and take control of your information. Visit our cutting-edge legal document analyzers with text file to find out today.
           </p>
         </div>
         <div className="right-screen">
@@ -137,7 +137,7 @@ function App() {
           <p className="textbox-container">
             <textarea id="textarea" className="textarea" rows="4" cols="60" placeholder="Data to Send"></textarea>
           </p>
-        <button className="submit" onClick={fetchData}>Analyze</button>
+          <button className="submit" onClick={fetchData}>Analyze</button>
         </div>
       </div>
       <div className="low-content">

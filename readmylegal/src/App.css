@@ -64,17 +64,6 @@ body {
 }
 
 
-.submit
-{
-  padding: 10px 10px;
-  border-radius: 10px;
-  align-content: center;
-  justify-content: center;
-  height: auto;
-  display: flex;
-  font-size: 16px;
-  font-family: 'A-TTF Shin Go Pro M';
-}
 
 .main-content
 {
@@ -113,12 +102,18 @@ body {
   color: white;
 }
 
+.right-screen
+{
+  flex: 1;
+  padding: 10px;
+  min-width: 50%;
+}
+
 .password-container
 {
-  width: 70%;
+  width: 90%;
   background-color: wheat;
-  display: flex; /* Add this to use Flexbox */
-  flex-direction: row; /* To align items vertically */
+  display: inline-block; /* Add this to use Flexbox */
   align-items: center;
   justify-content: center;
   font-family: 'A-TTF Shin Go Pro M';
@@ -129,16 +124,23 @@ body {
   padding: 10px; /* Add padding for spacing */
 }
 
-.right-screen
+
+.submit
 {
-  flex: 1;
-  padding: 10px;
-  min-width: 50%;
+  padding: 10px 10px;
+  border-radius: 10px;
+  align-content: center;
+  justify-content: center;
+  height: auto;
+  width: 25%;
+  display: inline;
+  font-size: 16px;
+  font-family: 'A-TTF Shin Go Pro M';
 }
 
 .textbox-container
 {
-  margin: 20px;
+  margin: 0px;
 }
 
 .textarea
