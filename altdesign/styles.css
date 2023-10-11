@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'A-OTF Shin Go Pro Regular', Times, serif;
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-section {
+    text-align: left;
+    width: 60%;
+    padding-left: 10%;
+}
+
+.logo img {
+    width: 100%;
+    max-width: 200px; /* Adjust the size as needed */
+}
+
+h1 {
+    font-size: 3em;
+    margin-top: 20px;
+}
+
+.tagline {
+    font-size: 1.2em;
+    margin-top: 10px;
+    padding-bottom: 10%;
+}
+
+.right-section {
+    width: 40%;
+    text-align: left;
+    padding-right: 10%;
+}
+
+.description {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #333;
+}
