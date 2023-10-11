@@ -5,8 +5,7 @@
 - [Reading your legal biz.](#reading-your-legal-biz)
 - [We built it with what?](#we-built-it-with-what)
 - [Knowing with style.](#knowing-with-style)
-- [The challenges? How much?](#the-challenges-how-much)
-- [And the result...?](#and-the-result)
+- [The challenges?](#the-challenges)
 - [What's next for ReadMyLegal.](#whats-next-for-readmylegal)
 - [Let's set this up!](#lets-set-this-up)
 - [License Information](#license-information)
@@ -31,11 +30,7 @@ ReadMyLegal.biz was built from the ground up as a web app in mind, making it acc
 
 The website has to be functional, easy-to-use, and stylish. We *spiced* it up with the latter. Leveraging React, we designed a precisely crafted interface that is not only extremely stylish but easy-to-use for everyone as well, including accessibility options.
 
-## The challenges? How much?
-
-Alot. We ran into **alot**. But each and every time, we came back stronger (*and smarter*) than before and, with a bit of tweaking, accomplished everything that we felt was important to implement in such a worthy web app.
-
-#### Wanna know a bit more? These include:
+## The challenges?
 
 - Security.
   - A big focus was emphasized on masking the API token. We learned the best token security practices to keep those legal documents safe and sound.
@@ -44,12 +39,6 @@ Alot. We ran into **alot**. But each and every time, we came back stronger (*and
     - We learned more about A, AAAA, CNAME, and other records in order to maintain and protect our domain as much as possible.
 - Design Philosophy
   - Held a group vote. We maintained a respectful manner with each other and collaborated well with each other, each of us playing a special role on the team.
-
-## And the result...?
-
-Nothing much to be said. We're proud of everything that we collaborated on together. We're proud of ourselves and our project. Furthermore, we've learned and grew to new heights. That in itself is possibly the greatest accomplishment of all.
-
-Thank you, Knighthacks 2023!
 
 ## What's next for ReadMyLegal.
 
